@@ -1790,9 +1790,10 @@ client.on('interactionCreate', async (interaction) => {
     }
 
     if(interaction.commandName === 'help'){
-      await interaction.reply(
-        'https://docs.google.com/document/d/10FpS0hHeqo5yKgIweX31PNr7h_uAD5Cm6kvbmeH4iwI/edit?usp=sharing',
-      );
+      await interaction.reply({
+        content: 'https://docs.google.com/document/d/10FpS0hHeqo5yKgIweX31PNr7h_uAD5Cm6kvbmeH4iwI/edit?usp=sharing',
+        ephemeral: true,
+      });
       return;
     }
   } catch(error){
