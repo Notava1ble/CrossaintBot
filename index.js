@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const { Client, Intents, MessageActionRow, MessageButton } = require('discord.js');
 const COMMANDS = require('./commands');
 const { getMatchData, parseResponse } = require('./matchDataFromId');
+const { Client, Intents, MessageAttachment } = require('discord.js');
 
 dotenv.config();
 
@@ -1367,9 +1368,9 @@ client.on('interactionCreate', async (interaction) => {
       const competition = rA(store, gCK(interaction));
       const leagueNumber = gLC(interaction, competition, admin);
 
-      const link1 = new AttachmentBuilder('./images/Profile1.png', { name: 'link_step1.png' });
-      const link2 = new AttachmentBuilder('./images/Profile2.png', { name: 'link_step2.png' });
-      const link3 = new AttachmentBuilder('./images/Profile3.png', { name: 'link_step3.png' });
+      const link1 = new MessageAttachment('./images/Profile1.png', { name: 'link_step1.png' });
+      const link2 = new MessageAttachment('./images/Profile2.png', { name: 'link_step2.png' });
+      const link3 = new MessageAttachment('./images/Profile3.png', { name: 'link_step3.png' });
       await interaction.reply({
         content: 'Please link your Discord by following this image:',
         files: [link1, link2, link3],
