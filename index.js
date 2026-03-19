@@ -1118,28 +1118,11 @@ async function getUserDataFromDiscord(id) {
     }
 }
 
-async function deployCommands(){
-  try {
-      if (process.env.GUILD_ID) {
-        const guild = await client.guilds.fetch(process.env.GUILD_ID);
-        await guild.commands.set(COMMANDS);
-        console.log(`Registered ${COMMANDS.length} guild command(s) in ${guild.name}.`);
-      } else {
-        await client.application.commands.set(COMMANDS);
-        console.log(`Registered ${COMMANDS.length} global command(s).`);
-      }
-    } catch (error) {
-      console.error('Failed to deploy commands.', error);
-      process.exitCode = 1;
-    }
-}
-
 const client = new Client({
   intents: [Intents.FLAGS.GUILDS],
 });
 
 client.once('ready', () => {
-  deployCommands()
   console.log(`Logged in as ${client.user.tag}`);
 });
 
