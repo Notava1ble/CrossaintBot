@@ -900,7 +900,7 @@ function fLB(competition){
     }
   }
 
-  const header = [`**${fCL(competition)} Leaderboard**`, `Status: ${fCS(competition)}`];
+  const header = [`**${fCL(competition)} Week ${competition.week} Leaderboard**`, `Status: ${fCS(competition)}`];
 
   if(currentSeed){
     header.push(`Current seed: ${currentSeed.name}`);
@@ -1215,10 +1215,12 @@ client.on('interactionCreate', async (interaction) => {
       }
 
       const leagueNumber = interaction.options.getInteger('league', true);
+      const week = interaction.options.getInteger('week', true);
       const maxTimeLimitSeconds = gLim(store, leagueNumber);
 
       channel.competition = {
         leagueNumber,
+        week, 
         maxTimeLimitSeconds,
         status: 'active',
         startedAt: new Date().toISOString(),
@@ -1236,7 +1238,7 @@ client.on('interactionCreate', async (interaction) => {
       };
       await cRegMsg(interaction.channel, channel.competition);
       const initMessage = await interaction.reply({
-        content: `Started the current competition for League ${leagueNumber}   Registration is now open. Time limit: ${fT(maxTimeLimitSeconds)}.`,
+        content: `Started the current competition for League ${leagueNumber} Registration is now open. Time limit: ${fT(maxTimeLimitSeconds)}.`,
         fetchReply: true,
       });
       channel.competition.initMessageId = initMessage.id;
