@@ -1,7 +1,9 @@
 Use the following commands to install the modules
+```
 npm install,
 npm run deploy:commands
 npm start
+```
 
 You also need to create a .env file:
 ```
