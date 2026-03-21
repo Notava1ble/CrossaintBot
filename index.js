@@ -1749,6 +1749,7 @@ client.on('interactionCreate', async (interaction) => {
         league = gLM(interaction);
       }
       for (const channel of Object.keys(store.channels)){
+        if (store.channels[channel]['competition'] == null) continue;
         const number = store.channels[channel]['competition']['leagueNumber'];
         if (number != league) continue;
         competition = rC(store, channel);
