@@ -1053,8 +1053,8 @@ function iHR(competition, userId){
   );
 }
 
-function gRid(competition, seed){
-  return seed.rankedMatchId || `manual-l${competition.leagueNumber}-w${gWN(competition)}-m${seed.name}`;
+function gRid(seed){
+  return seed.rankedMatchId || null;
 }
 
 function mkMRP(competition, seed, rankedMatchId){
@@ -2645,7 +2645,7 @@ client.on('interactionCreate', async (interaction) => {
         timeSeconds: null,
         submittedAt: null,
       };
-      seed.rankedMatchId = gRid(competition, seed);
+      seed.rankedMatchId = gRid(seed);
       if(!iT(competition)){
         try{
           await pushToWeb('/api/write/match/results', mkMRP(competition, seed, seed.rankedMatchId), 'POST');
@@ -2724,7 +2724,7 @@ client.on('interactionCreate', async (interaction) => {
         timeSeconds,
         dnf,
       );
-      seed.rankedMatchId = gRid(competition, seed);
+      seed.rankedMatchId = gRid(seed);
       if(!iT(competition)){
         try{
           await pushToWeb('/api/write/match/results', mkMRP(competition, seed, seed.rankedMatchId), 'POST');
