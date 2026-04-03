@@ -1047,9 +1047,10 @@ function gSD(competition, seed){
   return [...finishers, ...dnfs];
 }
 
+// This function should return true if there is an imported seed so that we cant unreg a player after a seed is imported. 
 function iHR(competition, userId){
   return Object.values(competition.seeds || {}).some(
-    (seed) => (seed.imported === true || Boolean(seed.rankedMatchId)) && Boolean(seed.results?.[userId]),
+    (seed) => (seed.imported === true || Boolean(seed.rankedMatchId)),
   );
 }
 
@@ -1058,10 +1059,6 @@ function gRid(seed){
 }
 
 function mkMRP(competition, seed, rankedMatchId){
-  if(!rankedMatchId){
-    throw new Error(`Seed ${seed.name} does not have a ranked match id to sync.`);
-  }
-
   return {
     ...mkCP(competition),
     matchNumber: Number(seed.name),
@@ -2243,7 +2240,7 @@ client.on('interactionCreate', async (interaction) => {
       }
 
       if(!iT(competition)){
-        await pushToWeb('/api/write/player', {
+        await pushToWeb('/api/write/player/unregister', {
           ...mkCP(competition),
           uuid: rUuid(registeredPlayer, fPN(registeredPlayer)),
         }, 'PATCH');
