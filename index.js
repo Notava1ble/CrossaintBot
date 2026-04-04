@@ -2280,7 +2280,7 @@ client.on('interactionCreate', async (interaction) => {
       }
 
       if(!iT(competition)){
-        await pushToWeb('/api/write/player', {
+        await pushToWeb('/api/write/player/unregister', {
           ...mkCP(competition),
           uuid: rUuid(removedPlayer, fPN(removedPlayer)),
         }, 'PATCH');
